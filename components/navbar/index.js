@@ -14,9 +14,7 @@ export default function Navbar({ children }) {
 
   const [login, setLogin] = useState();
 
-
   useEffect(() => setLogin(Cookies.get('token')), [user]);
-
 
   const [navbar, setNavbar] = useState(false);
 
@@ -131,6 +129,11 @@ export default function Navbar({ children }) {
         </div>
       </nav>
       {children}
+      <div class="fixed bottom-0 left-0 text-white right-0 w-full text-center ">
+        <div class="bg-main">
+          <div>Moraru Miruna - <span class="text-pink ">©</span> All Rights Reserved.</div>
+        </div>
+      </div>
     </div>
   );
 }
