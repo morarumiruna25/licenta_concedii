@@ -185,8 +185,12 @@ export default function Home({ users }) {
 				<button onClick={handleLogout}>Logut</button>
 				</div> */
 }
-export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/api/getusers');
+export async function getServerSideProps() {
+  const baseUrl =
+    process.env.NODE_ENV === 'production'
+      ? 'https://yourwebsite.com'
+      : 'http://localhost:3000';
+  const res = await fetch(`${baseUrl}/api/getusers`);
   const users = await res.json();
   return { props: { users } };
 }
