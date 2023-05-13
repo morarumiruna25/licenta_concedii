@@ -196,7 +196,7 @@ export default Conturi;
 export async function getServerSideProps() {
   const baseUrl =
     process.env.NODE_ENV === 'production'
-      ? 'https://yourwebsite.com'
+      ? 'https://licenta-concedii.vercel.app'
       : 'http://localhost:3000';
   const res = await fetch(`${baseUrl}/api/getusers`);
   const users = await res.json();
