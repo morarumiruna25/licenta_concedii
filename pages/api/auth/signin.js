@@ -12,7 +12,11 @@ export default async function handler(req, res) {
 		if (req.method === "POST") {
 			const { email, parola } = req.body;
 			const register = await Register.findOne({ email });
-
+			console.log(register);
+			
+			if(!register){
+				return res.json({ type: "error" , message: "Email sau parola gresite" });
+			}
 
 			if (register) {
 				const isValid = await bcrypt.compare(parola, register.parola);
@@ -25,13 +29,13 @@ export default async function handler(req, res) {
 				return res.json({ type: "error", message: "Toate campurile sunt obilgatorii !" });
 			}
 			res.status(200).json({
-				email: register.email,
-				nume: register.nume,
+				register,
 				type: "success",
 				message: "Logare ralizata cu success !",
 			});
 		}
 	} catch (error) {
-		res.json({ type: "error", message: error.message });
+		console.log(error);
+		res.status(500).json({ type: "error", message: error.message });
 	}
 }

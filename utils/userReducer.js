@@ -1,23 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
+import { createSlice } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {},
   reducers: {
     setUser: (state, action) => {
-      state.email = action.payload.user.email;
-      state.nume = action.payload.user.nume;
+      state.user = action.payload.user;
+      // state.nume = action.payload.user.nume;
 
-			Cookies.set("token", action.payload.user.email, { expires: 7 });
-
+      Cookies.set('token', action.payload.user.email, { expires: 7 });
+      Cookies.set('nume', action.payload.user.nume, { expires: 7 });
     },
-    clearUser: (state) => {
-      state.email = null;
-      state.nume = null;
+    clearUser: state => {
+      state.user = null;
 
-			Cookies.remove("token");
-
+      Cookies.remove('token');
+      Cookies.remove('nume');
     },
   },
 });
